@@ -11,7 +11,7 @@ import heroCity from "@/assets/hero-city.png";
  *  Contoh Indonesia: 0812-3456-7890  ->  "6281234567890"
  * ======================================================================
  */
-export const WHATSAPP_NUMBER = "6281234567890";
+export const WHATSAPP_NUMBER = "62881010949870";
 
 export interface MerchColor {
   name: string;

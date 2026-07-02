@@ -1,0 +1,489 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-neon-pink: var(--neon-pink);
+  --color-neon-cyan: var(--neon-cyan);
+  --color-neon-yellow: var(--neon-yellow);
+  --color-neon-purple: var(--neon-purple);
+  --color-neon-green: var(--neon-green);
+  --color-cream: var(--cream);
+  --color-ink: var(--ink);
+  --color-joycon-red: var(--joycon-red);
+  --color-joycon-blue: var(--joycon-blue);
+  --color-matte-900: var(--matte-900);
+  --color-matte-800: var(--matte-800);
+  --color-matte-700: var(--matte-700);
+  --color-matte-600: var(--matte-600);
+  --color-matte-fg: var(--matte-fg);
+  --radius-switch: var(--radius-switch);
+  --font-display: var(--font-display);
+  --font-pixel: var(--font-pixel);
+  --font-mono-retro: var(--font-mono-retro);
+  --font-body: var(--font-body);
+}
+
+:root {
+  --radius: 0px; /* 8-bit = hard corners everywhere */
+
+  /* ---------- eastwardgame.com palette: deep navy dusk + warm pixel cream ---------- */
+  --background: #0b1e33; /* Eastward signature deep navy */
+  --foreground: #fffde5; /* Eastward pale cream (their dominant text tone) */
+  --card: #10294a; /* raised navy panel */
+  --card-foreground: #fffde5;
+  --popover: #10294a;
+  --popover-foreground: #fffde5;
+  --primary: #e8863b; /* Eastward lantern orange (warmed so it won't fight the red) */
+  --primary-foreground: #fffde5;
+  --secondary: #143458; /* mid navy */
+  --secondary-foreground: #fffde5;
+  --muted: #1c3c60;
+  --muted-foreground: #a6bccb; /* dusty cream-blue for secondary text */
+  --accent: #f2b950; /* mustard gold */
+  --accent-foreground: #0b1e33;
+  --destructive: #d9533b; /* rust red (muted, not neon) */
+  --destructive-foreground: #fffde5;
+  --border: #2c5470; /* navy border */
+  --input: #143458;
+  --ring: #5ab3c2; /* muted teal focus ring */
+
+  /* ---------- Harmonized Eastward accent family — warm lantern tones tuned to sit on navy ---------- */
+  --neon-pink: #d9533b; /* warm rust red */
+  --neon-cyan: #5ab3c2; /* muted teal (Eastward's cool counterpoint) */
+  --neon-yellow: #f2b950; /* mustard gold */
+  --neon-purple: #9c7594; /* dusty mauve */
+  --neon-green: #8aa85f; /* sage */
+
+  /* Joy-Con split rails, aligned to the Eastward palette so they don't clash */
+  --joycon-red: #d9533b;
+  --joycon-blue: #5ab3c2;
+
+  /* ---------- Nintendo Switch "console body" matte-grey ramp (modern chrome only) ---------- */
+  --matte-900: #191c1f; /* deepest console shell */
+  --matte-800: #24282c; /* nav rail / panel base */
+  --matte-700: #31363b; /* raised control */
+  --matte-600: #454b52; /* hover / border */
+  --matte-fg: #e7ecef; /* cool light grey text on matte surfaces */
+
+  /* Switch chrome is softly rounded even though the 8-bit core stays hard-cornered */
+  --radius-switch: 10px;
+
+  --cream: #fffde5; /* warm cream */
+  --ink: #06111f; /* deep navy-black for hard 8-bit block shadows */
+
+  /* Retro pixel typography */
+  --font-display: "Press Start 2P", system-ui, sans-serif;
+  --font-pixel: "Press Start 2P", system-ui, sans-serif;
+  --font-mono-retro: "VT323", "Courier New", monospace;
+  --font-body: "VT323", "Courier New", monospace;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-body);
+    font-size: 1.15rem; /* VT323 has a small x-height — bump it up */
+    line-height: 1.35;
+    -webkit-font-smoothing: none;
+    image-rendering: pixelated;
+    /* Faint muted-teal pixel grid behind everything */
+    background-image:
+      linear-gradient(rgba(90, 179, 194, 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(90, 179, 194, 0.06) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    letter-spacing: 0.02em;
+    line-height: 1.25;
+    text-transform: uppercase;
+  }
+  img.pixelated {
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+  }
+
+  /* ---------- Site-wide CRT scanline + vignette overlay ---------- */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 9998;
+    pointer-events: none;
+    background:
+      repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.22) 0px,
+        rgba(0, 0, 0, 0.22) 1px,
+        transparent 1px,
+        transparent 3px
+      ),
+      radial-gradient(
+        ellipse at center,
+        transparent 55%,
+        rgba(0, 0, 0, 0.55) 100%
+      );
+    mix-blend-mode: multiply;
+  }
+}
+
+/* ---------- Memory-card block (thick neon border + solid block shadow) ---------- */
+@utility pixel-card {
+  position: relative;
+  background: var(--card);
+  border: 4px solid var(--foreground);
+  border-radius: 0;
+  box-shadow: 6px 6px 0 0 var(--ink);
+  image-rendering: pixelated;
+}
+
+@utility sticker {
+  /* Hard pixel outline so sprites pop on the background */
+  filter: drop-shadow(2px 0 0 var(--ink)) drop-shadow(-2px 0 0 var(--ink))
+    drop-shadow(0 2px 0 var(--ink)) drop-shadow(0 -2px 0 var(--ink))
+    drop-shadow(0 0 12px rgba(90, 179, 194, 0.35));
+}
+
+/* ---------- Nintendo Switch: console body framed by two Joy-Cons (red L / blue R) ---------- */
+@utility joycon-frame {
+  position: relative;
+  background: var(--card);
+  border: 3px solid var(--ink);
+  border-left: 8px solid var(--joycon-red);
+  border-right: 8px solid var(--joycon-blue);
+  border-radius: 0;
+  box-shadow: 6px 6px 0 0 var(--ink);
+  image-rendering: pixelated;
+}
+
+/* ---------- Nintendo Switch home-menu app tile (blue selection ring on focus/hover) ---------- */
+@utility switch-tile {
+  position: relative;
+  border: 3px solid transparent;
+  outline: 3px solid transparent;
+  outline-offset: 2px;
+  border-radius: 0;
+  transition:
+    transform 90ms steps(2),
+    outline-color 90ms steps(2),
+    box-shadow 90ms steps(2);
+  &:hover,
+  &:focus-visible {
+    transform: translateY(-3px);
+    outline-color: var(--joycon-blue);
+    box-shadow:
+      0 0 0 3px var(--cream),
+      0 0 16px var(--joycon-blue);
+  }
+}
+
+/* ---------- Nintendo Switch matte-grey panel (settings popover / system chrome) ---------- */
+@utility matte-panel {
+  background: var(--matte-800);
+  color: var(--matte-fg);
+  border: 1px solid var(--matte-600);
+  border-radius: var(--radius-switch);
+  box-shadow:
+    0 12px 30px -8px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+}
+
+/* ---------- Switch Home-Menu tile: rounded, matte, blue glow border on focus/hover ---------- */
+@utility switch-nav-tile {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-switch);
+  border: 2px solid transparent;
+  background: var(--matte-700);
+  color: var(--matte-fg);
+  transition:
+    transform 120ms ease,
+    border-color 120ms ease,
+    box-shadow 120ms ease,
+    background-color 120ms ease;
+  &:hover,
+  &:focus-visible {
+    outline: none;
+    transform: translateY(-2px);
+    background: var(--matte-600);
+    border-color: var(--joycon-blue);
+    box-shadow:
+      0 0 0 2px rgba(90, 179, 194, 0.35),
+      0 0 18px rgba(90, 179, 194, 0.55);
+  }
+}
+
+/* ---------- "Press Ⓐ" style focus cue that fades in on hover/focus ---------- */
+@utility press-cue {
+  opacity: 0;
+  transform: translateY(4px);
+  transition:
+    opacity 120ms ease,
+    transform 120ms ease;
+  .group:hover &,
+  .group:focus-visible &,
+  .group:focus-within & {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---------- 8-bit menu button (square, block shadow, ▶ selector on hover) ---------- */
+@utility pixel-btn {
+  position: relative;
+  font-family: var(--font-pixel);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.75rem 1.25rem;
+  background: var(--card);
+  color: var(--cream);
+  border: 3px solid var(--neon-cyan);
+  border-radius: 0;
+  box-shadow: 4px 4px 0 0 var(--ink);
+  transition:
+    transform 90ms steps(2),
+    background-color 90ms steps(2),
+    box-shadow 90ms steps(2),
+    color 90ms steps(2),
+    text-shadow 90ms steps(2);
+  cursor: pointer;
+  text-transform: uppercase;
+  /* menu selector arrow, collapsed until hover */
+  &::before {
+    content: "▶";
+    display: inline-block;
+    width: 0;
+    margin-right: 0;
+    overflow: hidden;
+    opacity: 0;
+    color: var(--neon-yellow);
+    transition:
+      width 90ms steps(2),
+      opacity 90ms steps(2),
+      margin-right 90ms steps(2);
+  }
+  &:hover {
+    background: var(--ink);
+    color: var(--neon-cyan);
+    transform: translate(-2px, -2px);
+    box-shadow:
+      6px 6px 0 0 var(--ink),
+      0 0 14px var(--neon-cyan);
+    text-shadow: 0 0 8px var(--neon-cyan);
+  }
+  &:hover::before {
+    width: 1em;
+    margin-right: 0.35rem;
+    opacity: 1;
+  }
+  &:active {
+    transform: translate(2px, 2px);
+    box-shadow: 0 0 0 0 var(--ink);
+  }
+}
+
+/* ---------- Torn paper edges (kept for the marquee strip transitions) ---------- */
+@utility torn-top {
+  -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 40' preserveAspectRatio='none'><path d='M0,40 L0,18 L20,22 L40,12 L70,20 L100,8 L140,18 L180,6 L220,16 L260,10 L300,20 L340,8 L380,18 L420,6 L460,14 L500,4 L540,16 L580,8 L620,18 L660,6 L700,14 L740,8 L780,18 L820,6 L860,14 L900,8 L940,18 L980,6 L1020,16 L1060,8 L1100,18 L1140,6 L1180,16 L1200,10 L1200,40 Z' fill='black'/></svg>");
+  mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 40' preserveAspectRatio='none'><path d='M0,40 L0,18 L20,22 L40,12 L70,20 L100,8 L140,18 L180,6 L220,16 L260,10 L300,20 L340,8 L380,18 L420,6 L460,14 L500,4 L540,16 L580,8 L620,18 L660,6 L700,14 L740,8 L780,18 L820,6 L860,14 L900,8 L940,18 L980,6 L1020,16 L1060,8 L1100,18 L1140,6 L1180,16 L1200,10 L1200,40 Z' fill='black'/></svg>");
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
+
+@utility torn-bottom {
+  -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 40' preserveAspectRatio='none'><path d='M0,0 L1200,0 L1200,22 L1180,30 L1140,18 L1100,26 L1060,16 L1020,28 L980,18 L940,30 L900,20 L860,28 L820,16 L780,28 L740,20 L700,30 L660,18 L620,28 L580,16 L540,26 L500,18 L460,28 L420,16 L380,26 L340,18 L300,28 L260,20 L220,30 L180,18 L140,28 L100,16 L70,26 L40,18 L20,28 L0,22 Z' fill='black'/></svg>");
+  mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 40' preserveAspectRatio='none'><path d='M0,0 L1200,0 L1200,22 L1180,30 L1140,18 L1100,26 L1060,16 L1020,28 L980,18 L940,30 L900,20 L860,28 L820,16 L780,28 L740,20 L700,30 L660,18 L620,28 L580,16 L540,26 L500,18 L460,28 L420,16 L380,26 L340,18 L300,28 L260,20 L220,30 L180,18 L140,28 L100,16 L70,26 L40,18 L20,28 L0,22 Z' fill='black'/></svg>");
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
+
+/* ---------- Pixel grid panel background ---------- */
+@utility pixel-grid {
+  background-image:
+    linear-gradient(rgba(90, 179, 194, 0.09) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(90, 179, 194, 0.09) 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+
+/* ---------- Local CRT scanline overlay (for individual panels) ---------- */
+@utility scanlines {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.25) 0px,
+      rgba(0, 0, 0, 0.25) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+    z-index: 2;
+  }
+}
+
+@utility crt-overlay {
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.28) 0px,
+        rgba(0, 0, 0, 0.28) 1px,
+        transparent 1px,
+        transparent 3px
+      ),
+      radial-gradient(
+        ellipse at center,
+        transparent 55%,
+        rgba(0, 0, 0, 0.5) 100%
+      );
+    z-index: 2;
+  }
+}
+
+@keyframes idle-float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(var(--tw-rotate, 0deg));
+  }
+  50% {
+    transform: translateY(-12px) rotate(var(--tw-rotate, 0deg));
+  }
+}
+@keyframes blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  50.01%,
+  100% {
+    opacity: 0.3;
+  }
+}
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+@keyframes wobble {
+  0%,
+  100% {
+    transform: rotate(-2deg);
+  }
+  50% {
+    transform: rotate(2deg);
+  }
+}
+@keyframes neon-pulse {
+  0%,
+  100% {
+    box-shadow:
+      4px 4px 0 0 var(--ink),
+      0 0 8px var(--neon-cyan);
+  }
+  50% {
+    box-shadow:
+      4px 4px 0 0 var(--ink),
+      0 0 18px var(--neon-cyan);
+  }
+}
+
+@utility animate-idle {
+  animation: idle-float 3.5s ease-in-out infinite;
+}
+@utility animate-blink {
+  animation: blink 1.2s steps(2) infinite;
+}
+@utility animate-marquee {
+  animation: marquee 40s linear infinite;
+}
+@utility animate-wobble {
+  animation: wobble 4s ease-in-out infinite;
+}
+@utility animate-neon {
+  animation: neon-pulse 1.6s ease-in-out infinite;
+}
+
+/* Switch "System Settings" can turn the global CRT scanline overlay off */
+html.crt-off body::after {
+  display: none !important;
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateX(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@utility animate-toast {
+  animation: toast-in 240ms ease both;
+}
+
+/* ---------- Respect users who prefer reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

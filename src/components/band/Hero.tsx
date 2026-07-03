@@ -9,44 +9,44 @@ import {
 import { AbxyCluster } from "@/components/band/JoyCon";
 
 // Scattered character sprite positions (% of container) — one per band member.
-// Adjusted for better mobile spacing to prevent excessive overlap
+// Adjusted for better mobile spacing: moved higher + more spread out
 const charPositions = [
   {
-    left: "1%",
-    bottom: "8%",
-    size: "18vh",
+    left: "0%",
+    bottom: "18%",
+    size: "16vh",
     sizeDesktop: "28vh",
     rotate: -6,
     delay: 0,
   },
   {
-    left: "20%",
-    bottom: "2%",
-    size: "19vh",
+    left: "18%",
+    bottom: "15%",
+    size: "17vh",
     sizeDesktop: "34vh",
     rotate: 3,
     delay: 0.12,
   },
   {
-    left: "40%",
-    bottom: "5%",
-    size: "18vh",
+    left: "38%",
+    bottom: "20%",
+    size: "16vh",
     sizeDesktop: "30vh",
     rotate: -2,
     delay: 0.24,
   },
   {
-    right: "19%",
-    bottom: "3%",
-    size: "19vh",
+    right: "17%",
+    bottom: "16%",
+    size: "17vh",
     sizeDesktop: "34vh",
     rotate: 4,
     delay: 0.36,
   },
   {
     right: "0%",
-    bottom: "9%",
-    size: "18vh",
+    bottom: "19%",
+    size: "16vh",
     sizeDesktop: "28vh",
     rotate: 6,
     delay: 0.48,

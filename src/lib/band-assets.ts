@@ -11,9 +11,13 @@ import activeimageguitarist2 from "@/assets/activeimageguitarist2.png";
 import bassist from "@/assets/member-bassist.png";
 import drummer from "@/assets/member-drummer.png";
 import activeimagedrummer from "@/assets/activeimagedrummer.png";
+import activeimagebassist from "@/assets/activeimagebassist.png";
 import album1 from "@/assets/album-1.jpg";
 import album2 from "@/assets/album-2.jpg";
 import album3 from "@/assets/album-3.jpg";
+import kaosputih from "@/assets/kaos-putih.jpg";
+import kaoshitam from "@/assets/kaos-hitam.jpg";
+import kaosputih2 from "@/assets/kaos-putih2.jpg";
 
 export const BAND_NAME = "SSR SUPREMACY";
 export const BAND_TAGLINE = "NOW I SEE YOU, NOW I DON'T";
@@ -114,8 +118,8 @@ export const members: Member[] = [
   },
   {
     id: "p3-moss",
-    name: "MOSS",
-    role: "BASS",
+    name: "ARI",
+    role: "Guitar 2",
     bio: "Player 3. Holds the low end together with duct tape and pure vibes. A defensive tank build — slow, unshakeable, felt more than heard. Speaks in sub-frequencies.",
     stats: {
       Instrument: "Bass Guitar",
@@ -124,7 +128,7 @@ export const members: Member[] = [
       Dislikes: "Treble, hurrying",
     },
     idleImage: bassist,
-    activeImage: bassist,
+    activeImage: activeimagebassist,
     color: NEON.green,
   },
   {
@@ -370,9 +374,9 @@ export const story = {
   paragraphs: [
     "The world turned its volume down. Streaming algorithms flattened every song into the same grey hum, and the cities forgot how to make noise.",
     "Underground, five players found an abandoned arcade cabinet still wired to a busted amplifier. They pressed START. The machine asked for a coin — and a band.",
-    "Now NEON STATIC tours the surface, frying the silence one pixel-perfect riff at a time. They wield a synth, a frying-pan-shaped guitar, and a high score nobody has matched.",
+    "Now SSR SUPREMACY tours the surface, frying the silence one pixel-perfect riff at a time. They wield a synth, a frying-pan-shaped guitar, and a high score nobody has matched.",
   ],
-  signature: "— synthesized in Neo-Kyoto by NEON STATIC",
+  signature: "— synthesized in Neo-Kyoto by SSR SUPREMACY",
 };
 
 /* ============================================================================

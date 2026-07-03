@@ -9,13 +9,13 @@ import { Footer } from "@/components/band/Footer";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "NEON STATIC — Indie Pixel Rock Band" },
+      { title: "SSR SUPREMACY — Indie Pixel Rock Band" },
       {
         name: "description",
         content:
-          "Official site of NEON STATIC. Character select, discography, and pixel-perfect chaos.",
+          "Official site of SSR SUPREMACY. Character select, discography, and pixel-perfect chaos.",
       },
-      { property: "og:title", content: "NEON STATIC — Indie Pixel Rock Band" },
+      { property: "og:title", content: "SSR SUPREMACY — Indie Pixel Rock Band" },
       {
         property: "og:description",
         content: "Pixel hearts, analog souls. New album out now.",

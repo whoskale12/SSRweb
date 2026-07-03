@@ -12,7 +12,7 @@ export function Discography() {
 
         <Reveal>
           <div className="mx-auto max-w-2xl">
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid grid-cols-2 gap-6 justify-items-center">
               {albums.map((a) => (
                 <a
                   key={a.id}

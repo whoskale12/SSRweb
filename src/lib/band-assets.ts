@@ -176,6 +176,7 @@ export const albums = [
   {
     id: 2,
     title: "The Untold Stories",
+    subtitle: "Single",
     year: 2025,
     cover: album3,
     tracks: 1,

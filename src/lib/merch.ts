@@ -1,8 +1,7 @@
-import album1 from "@/assets/album-1.jpg";
+import kaosputih from "@/assets/kaosputih.png";
+import kaoshitam from "@/assets/kaoshitam.png";
+import keychain from "@/assets/keychain.png";
 import album2 from "@/assets/album-2.jpg";
-import album3 from "@/assets/album-3.jpg";
-import galery1 from "@/assets/galery1.jpg";
-import heroCity from "@/assets/hero-city.png";
 
 /**
  * ======================================================================
@@ -25,6 +24,8 @@ export interface MerchItem {
   /** harga satuan dalam Rupiah */
   price: number;
   image: string;
+  /** gambar spesifik per warna - key adalah nama warna */
+  colorImages?: { [colorName: string]: string };
   blurb: string;
   /** kosong = produk tanpa ukuran (mis. poster / vinyl) */
   sizes?: string[];
@@ -36,62 +37,46 @@ export interface MerchItem {
 
 export const merchItems: MerchItem[] = [
   {
-    id: "tee-glitch",
-    name: "Glitch Logo Tee",
+    id: "tshirt-now-i-see",
+    name: "T-Shirt NOW I SEE YOU NO I DON'T",
     category: "T-SHIRT",
     price: 165000,
-    image: album1,
-    blurb: "Kaos cotton combed 24s, sablon plastisol logo glitch.",
+    image: kaoshitam,
+    colorImages: {
+      Hitam: kaoshitam,
+      Putih: kaosputih,
+    },
+    blurb: "Kaos cotton combed 24s, sablon plastisol design eksklusif.",
     sizes: ["S", "M", "L", "XL", "XXL"],
     colors: [
+      { name: "Hitam", hex: "#06111f" },
       { name: "Putih", hex: "#fffde5" },
-      { name: "Hitam", hex: "#06111f" },
-      { name: "Navy", hex: "#0b1e33" },
     ],
     hasSizeChart: true,
   },
   {
-    id: "hoodie-static",
-    name: "Static Pullover Hoodie",
-    category: "HOODIE",
-    price: 320000,
-    image: album2,
-    blurb: "Hoodie fleece tebal, bordir dada kiri + print punggung.",
-    sizes: ["M", "L", "XL", "XXL"],
-    colors: [
-      { name: "Hitam", hex: "#06111f" },
-      { name: "Cream", hex: "#fffde5" },
-      { name: "Rust", hex: "#d9533b" },
-    ],
-    hasSizeChart: true,
+    id: "keychain-ssr",
+    name: "SSR Keychain",
+    category: "ACCESSORY",
+    price: 45000,
+    image: keychain,
+    blurb: "Gantungan kunci akrilik dengan design logo SSR.",
   },
   {
-    id: "cap-pixel",
-    name: "Pixel Dad Cap",
-    category: "HEADWEAR",
-    price: 120000,
-    image: galery1,
-    blurb: "Topi baseball unstructured, bordir sprite 8-bit.",
-    colors: [
-      { name: "Navy", hex: "#0b1e33" },
-      { name: "Mustard", hex: "#f2b950" },
-    ],
-  },
-  {
-    id: "vinyl-lp",
-    name: 'Debut LP — Vinyl 12"',
-    category: "VINYL",
-    price: 450000,
-    image: album3,
-    blurb: "Piringan hitam warna teal, gatefold sleeve + poster.",
-  },
-  {
-    id: "poster-tour",
-    name: "Tour Poster A2",
-    category: "POSTER",
+    id: "cassette-tape",
+    name: "SSR Cassette Tape",
+    category: "MUSIC",
     price: 85000,
-    image: heroCity,
-    blurb: "Poster art kota pixel, dicetak di art paper 210gsm.",
+    image: album2,
+    colorImages: {
+      Hitam: album2,
+      Putih: album2,
+    },
+    blurb: "Kaset tape limited edition dengan tracklist lengkap album SSR.",
+    colors: [
+      { name: "Hitam", hex: "#06111f" },
+      { name: "Putih", hex: "#fffde5" },
+    ],
   },
 ];
 
@@ -148,4 +133,14 @@ export function buildWhatsAppOrderUrl(
 
   const text = encodeURIComponent(lines.join("\n"));
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${text}`;
+}
+
+/**
+ * Helper function untuk mendapatkan image berdasarkan warna yang dipilih
+ */
+export function getImageForColor(item: MerchItem, colorName?: string): string {
+  if (!colorName || !item.colorImages) {
+    return item.image;
+  }
+  return item.colorImages[colorName] || item.image;
 }

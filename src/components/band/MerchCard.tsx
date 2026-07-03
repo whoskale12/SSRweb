@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { buildWhatsAppOrderUrl, formatIDR, type MerchItem } from "@/lib/merch";
+import { buildWhatsAppOrderUrl, formatIDR, getImageForColor, type MerchItem } from "@/lib/merch";
 import { sfx } from "@/lib/sfx";
 import { emitToast } from "@/lib/toast";
 
@@ -31,10 +31,11 @@ export function MerchCard({
       {/* Product image */}
       <div className="relative mb-3 aspect-square overflow-hidden border-2 border-ink bg-secondary">
         <img
-          src={item.image}
+          key={color}
+          src={getImageForColor(item, color)}
           alt={item.name}
           loading="lazy"
-          className="pixelated h-full w-full object-cover"
+          className="pixelated h-full w-full object-cover transition-opacity duration-300"
         />
         <span className="absolute left-0 top-0 bg-ink px-2 py-1 font-pixel text-[8px] tracking-wider text-neon-yellow">
           {item.category}

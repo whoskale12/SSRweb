@@ -4,7 +4,7 @@
 > file top-to-bottom first, then run the health check, then continue from
 > **§7 NEXT STEPS**. Keep this file updated at the end of every work session.
 >
-> Last updated: 2026-07-03 (17:00 WIB)
+> Last updated: 2026-07-03 (17:35 WIB)
 
 ---
 
@@ -168,6 +168,67 @@ Each has `idleImage` + `activeImage` sprites in `src/assets/`.
     with smaller sizes, significantly reducing overlap on mobile devices.
   - Committed and pushed to GitHub: "Further adjust mobile character spacing - move 
     higher and spread more" (commit 2a37fa7)
+
+### Latest work (17:20 WIB) — REVERTED at 17:35, see below:
+- Tried swapping body+headings to **Nunito** for legibility (user asked for
+  eastward-style readable fonts). User then decided the original pixel fonts looked
+  better and asked to revert.
+
+### Latest work (17:35 WIB):
+- **Reverted the Nunito typography swap back to the original pixel fonts** (user:
+  "balikin ke font sebelumnya, ternyata cocokan pake yang tadi"):
+  - `src/routes/__root.tsx`: Google Fonts `<link>` back to
+    `Press+Start+2P&family=VT323` (removed Nunito).
+  - `src/styles.css` `:root` tokens restored: `--font-display`/`--font-pixel` =
+    `Press Start 2P`; `--font-mono-retro`/`--font-body` = `VT323`.
+  - `body` restored: `font-size` 1.15rem, `line-height` 1.35,
+    `-webkit-font-smoothing: none`, `image-rendering: pixelated`.
+  - `h1–h4` restored: `letter-spacing: 0.02em`, `line-height: 1.25`, no explicit
+    font-weight. Typography is now identical to before the swap.
+
+### Latest work (18:04 WIB):
+- **Restructured discography into maxi single format**:
+  - Updated `src/lib/band-assets.ts`:
+    - Combined the two separate albums "No Better Self" and "DreamCreeper" into a 
+      single **maxi single** titled **"Now I See You, Now I Don't"** (the band's tagline).
+    - Added `subtitle: "Maxi Single"` field to indicate the release format.
+    - Updated tracks count to 2 and combined length to "07:38".
+    - Removed the separate "DreamCreeper" album entry.
+    - Renumbered "The Untold Stories" from albumId 3 to albumId 2.
+  - Updated `albumStories` array:
+    - Maxi single (albumId: 1) now shows disc label "MAXI SINGLE".
+    - Story explains both tracks: "No Better Self" and "DreamCreeper" as two sides 
+      of the same creative session.
+    - Track 1: "No Better Self" - the boss fight take with JAY's laugh.
+    - Track 2: "DreamCreeper" - the ghost arpeggio track from 2-5 a.m.
+    - Removed the separate DreamCreeper album story.
+    - Renumbered "The Untold Stories" to albumId 2.
+  - Updated `src/components/band/Discography.tsx`:
+    - Added subtitle display support - shows "Maxi Single" in neon cyan when hovering 
+      over the album cover.
+    - Subtitle appears below the album title in smaller pixel font (8px).
+  - **Result**: Discography now correctly shows "Now I See You, Now I Don't" as a 
+    maxi single containing 2 tracks. When clicked, the album detail page shows the 
+    story of both "No Better Self" and "DreamCreeper" songs as part of the same release.
+  - Committed and pushed to GitHub: "Restructure discography: Create maxi single 
+    'Now I See You, Now I Don't' containing No Better Self and DreamCreeper tracks" 
+    (commit 3133cd6)
+
+### Latest work (18:20 WIB):
+- **Centered discography layout and added release type subtitles**:
+  - Updated `src/components/band/Discography.tsx`:
+    - Changed grid layout from `grid-cols-3` to `grid-cols-2` for proper centering 
+      with the now 2-album discography (was designed for 3 albums).
+    - Added `gap-6` (increased from gap-4) and `justify-items-center` for better 
+      spacing and alignment.
+  - Updated `src/lib/band-assets.ts`:
+    - Added `subtitle: "Single"` to "The Untold Stories" album to indicate it's a 
+      standard single (1 track) as opposed to the maxi single (2 tracks).
+  - **Result**: Discography section now displays perfectly centered with 2 albums. 
+    Both albums show their release types on hover: "Now I See You, Now I Don't" 
+    displays "Maxi Single" and "The Untold Stories" displays "Single".
+  - Committed and pushed to GitHub: "Center discography layout and add release type 
+    subtitles" (commit c9524c8)
 
 ## 7. NEXT STEPS (pick up here)
 

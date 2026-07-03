@@ -35,6 +35,11 @@ export function Discography() {
                     <p className="font-pixel text-[10px] text-white drop-shadow-[2px_2px_0_rgba(0,0,0,0.8)]">
                       {a.title}
                     </p>
+                    {a.subtitle && (
+                      <p className="font-pixel text-[8px] text-neon-cyan drop-shadow-[1px_1px_0_rgba(0,0,0,0.8)] mt-1">
+                        {a.subtitle}
+                      </p>
+                    )}
                   </div>
                 </a>
               ))}

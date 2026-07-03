@@ -166,22 +166,15 @@ export const members: Member[] = [
 export const albums = [
   {
     id: 1,
-    title: "No Better Self",
+    title: "Now I See You, Now I Don't",
+    subtitle: "Maxi Single",
     year: 2026,
     cover: album1,
     tracks: 2,
-    length: "04:38",
+    length: "07:38",
   },
   {
     id: 2,
-    title: "DreamCreeper",
-    year: 2026,
-    cover: album2,
-    tracks: 2,
-    length: "03:00",
-  },
-  {
-    id: 3,
     title: "The Untold Stories",
     year: 2025,
     cover: album3,
@@ -203,50 +196,28 @@ export interface AlbumStory {
 export const albumStories: AlbumStory[] = [
   {
     albumId: 1,
-    disc: "DISC 01",
+    disc: "MAXI SINGLE",
     color: NEON.pink,
-    logline: "The save file where the band finally met their own reflection.",
+    logline: "Two sides of the same save file — the run you get and the dream you chase.",
     paragraphs: [
       '"No Better Self" started as a dare: track the whole thing in one all-nighter — no overdubs, no undo. The band booked the practice space until sunrise and pressed record on a tape deck older than any of them.',
-      "Halfway through, the CRT in the corner flickered on by itself and showed each player their own character sprite, pixel-perfect, staring back. Every take after that felt like a boss fight against the version of yourself you keep on pause.",
-      "What survived the night became this record: two tracks, zero retries, and a title that admits the obvious — there is no better self waiting at the next checkpoint. This is the run you get.",
+      "Halfway through, the CRT in the corner flickered on by itself. First it showed their own reflection, pixel-perfect. Then it glitched and showed something else — a dream walking through static, humming back at them.",
+      "What survived the night became this maxi single: two tracks that belong together, zero retries, and a title that admits the obvious — there is no better self waiting at the next checkpoint. This is the run you get, and this is the dream that creeps in when you pause.",
     ],
     tracks: [
       {
         title: "No Better Self",
-        note: "The opening riff is the actual first take — you can hear JAY laugh right before the last chorus.",
+        note: "The opening riff is the actual first take — you can hear JAY laugh right before the last chorus. A boss fight against the version of yourself you keep on pause.",
       },
       {
-        title: "Mirror Match",
-        note: "Bass and synth trade the same four bars until you can't tell who's copying whom. That's the point.",
+        title: "DreamCreeper",
+        note: "Built around the 'ghost' arpeggio the band found already in the file. Written between 2 and 5 a.m., when the only signal left is static with a heartbeat.",
       },
     ],
   },
   {
     albumId: 2,
     disc: "DISC 02",
-    color: NEON.cyan,
-    logline:
-      "A glitch learned to walk through dreams, and it hummed this back to us.",
-    paragraphs: [
-      "\"DreamCreeper\" is the band's night-shift record. Written between 2 and 5 a.m., when the city's streaming algorithm goes quiet and the only signal left is static with a heartbeat.",
-      "The crew swears a stray process kept adding notes to the project file overnight — arpeggios nobody played, a snare that appears once and never returns. They stopped deleting it and started answering it.",
-      "The result creeps: soft where you expect loud, landing a combo the moment you drop your guard. Play it with headphones and the room disappears.",
-    ],
-    tracks: [
-      {
-        title: "DreamCreeper",
-        note: "Built around the 'ghost' arpeggio the band found already in the file. Nobody has admitted to writing it.",
-      },
-      {
-        title: "Lucid Static",
-        note: "The fade-out isn't a fade — it's the tape running out. They kept it.",
-      },
-    ],
-  },
-  {
-    albumId: 3,
-    disc: "DISC 03",
     color: NEON.purple,
     logline: "Before the high score, before the neon — one coin, one continue.",
     paragraphs: [

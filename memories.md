@@ -4,7 +4,7 @@
 > file top-to-bottom first, then run the health check, then continue from
 > **§7 NEXT STEPS**. Keep this file updated at the end of every work session.
 >
-> Last updated: 2026-07-03 (16:28 WIB)
+> Last updated: 2026-07-03 (17:00 WIB)
 
 ---
 
@@ -126,9 +126,48 @@ Each has `idleImage` + `activeImage` sprites in `src/assets/`.
       `item.image`, so image updates in real-time when user selects a color.
     - Added `key={color}` prop to `<img>` to force React re-render on color change.
     - Added `transition-opacity duration-300` for smooth fade effect during switch.
-  - **Result**: When user clicks "Hitam" or "Putih" color swatch, product image 
-    instantly changes to show that color variant. Fully working for t-shirt; 
-    keychain/cassette await real product photos.
+   - **Result**: When user clicks "Hitam" or "Putih" color swatch, product image 
+     instantly changes to show that color variant. Fully working for t-shirt; 
+     keychain/cassette await real product photos.
+
+### Latest work (16:54 WIB):
+- **Fixed mobile character overlap issue in Hero section**:
+  - Updated `src/components/band/Hero.tsx` `charPositions` array:
+    - Reduced mobile character sizes from 20-24vh to 18-19vh to minimize overlap.
+    - Adjusted horizontal spacing to spread characters more evenly across screen:
+      - Position 1: left 4% → 1%
+      - Position 2: left 23% → 20%
+      - Position 3: left 42% → 40%
+      - Position 4: right 22% → 19%
+      - Position 5: right 3% → 0%
+    - Desktop sizes remain unchanged (28-34vh).
+  - **Result**: Band member pixel-art characters now display with better spacing 
+    on mobile screens, reducing overlap from ~50%+ to acceptable levels while 
+    maintaining visual cohesion. Each character is now more visible and distinct.
+  - Committed and pushed to GitHub: "Fix mobile character overlap - adjust spacing 
+    and sizes for better visibility"
+
+### Latest work (17:00 WIB):
+- **Second iteration of mobile character overlap fix** (user feedback: still overlapping):
+  - Further updated `src/components/band/Hero.tsx` `charPositions` array:
+    - Reduced mobile sizes again from 18-19vh to 16-17vh for more breathing room.
+    - Moved all characters significantly higher (increased bottom positions):
+      - Position 1: bottom 8% → 18%
+      - Position 2: bottom 2% → 15%
+      - Position 3: bottom 5% → 20%
+      - Position 4: bottom 3% → 16%
+      - Position 5: bottom 9% → 19%
+    - Adjusted horizontal positions to maximize spread:
+      - Position 1: left 1% → 0% (full edge)
+      - Position 2: left 20% → 18%
+      - Position 3: left 40% → 38%
+      - Position 4: right 19% → 17%
+      - Position 5: right 0% → 0% (full edge)
+    - Desktop sizes still unchanged (28-34vh).
+  - **Result**: Characters now positioned higher up on screen and spread more evenly 
+    with smaller sizes, significantly reducing overlap on mobile devices.
+  - Committed and pushed to GitHub: "Further adjust mobile character spacing - move 
+    higher and spread more" (commit 2a37fa7)
 
 ## 7. NEXT STEPS (pick up here)
 

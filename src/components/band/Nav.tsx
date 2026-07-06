@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { BAND_NAME } from "@/lib/band-assets";
 import { sfx } from "@/lib/sfx";
+import { isFormal, setFormal } from "@/lib/formal";
 import { SwitchHomeBadge } from "@/components/band/JoyCon";
 import { IconButton } from "@/components/band/SwitchChrome";
 import { SettingsMenu } from "@/components/band/SettingsMenu";
@@ -35,11 +36,17 @@ function NavLink({ href, label }: { href: string; label: string }) {
 export function Nav() {
   const [open, setOpen] = useState(false);
   const [sfxOn, setSfxOn] = useState(false);
+  const [formalOn, setFormalOn] = useState(false);
 
   useEffect(() => {
     const sync = () => setSfxOn(sfx.enabled);
     sync();
     return sfx.subscribe(sync);
+  }, []);
+
+  // Reflect the persisted Formal Mode preference once mounted (SSR-safe).
+  useEffect(() => {
+    setFormalOn(isFormal());
   }, []);
 
   return (
@@ -69,6 +76,20 @@ export function Nav() {
             <div className="hidden lg:block">
               <SwitchHomeBadge />
             </div>
+            <IconButton
+              aria-label={
+                formalOn ? "Switch to pixel mode" : "Switch to formal mode"
+              }
+              aria-pressed={formalOn}
+              active={formalOn}
+              title={formalOn ? "Formal mode: ON" : "Formal mode: OFF"}
+              onClick={() => {
+                sfx.select();
+                setFormalOn(setFormal(!formalOn));
+              }}
+            >
+              {formalOn ? "🎩" : "👾"}
+            </IconButton>
             <IconButton
               aria-label={sfxOn ? "Mute UI sound" : "Enable UI sound"}
               active={sfxOn}

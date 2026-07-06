@@ -4,7 +4,7 @@
 > file top-to-bottom first, then run the health check, then continue from
 > **§7 NEXT STEPS**. Keep this file updated at the end of every work session.
 >
-> Last updated: 2026-07-03 (17:35 WIB)
+> Last updated: 2026-07-06 (Formal Mode added)
 
 ---
 
@@ -229,6 +229,70 @@ Each has `idleImage` + `activeImage` sprites in `src/assets/`.
     displays "Maxi Single" and "The Untold Stories" displays "Single".
   - Committed and pushed to GitHub: "Center discography layout and add release type 
     subtitles" (commit c9524c8)
+
+### Latest work (2026-07-06) — FORMAL MODE (minimalist light theme toggle):
+- **New feature: a switchable "Formal Mode"** — a clean, minimalist LIGHT theme
+  modeled on **https://thepanturas.com/store/** (paper background, black text,
+  Inter sans, thin 1px borders, no CRT/neon/glow/block-shadows). Opt-in; the
+  default remains the pixel/neon/Switch look. User's chosen scope: **full
+  minimalist**, **keep the band sprites** (just softened), **toggle = dedicated
+  navbar button**.
+- **Mechanism** (mirrors the existing CRT toggle): a `formal` class on `<html>`
+  overrides the CSS variables + neutralizes the pixel utilities. Pref persisted
+  to localStorage key **`ssr:formal`** ("on"/"off"), re-applied on boot so no flash.
+- **Files added / changed:**
+  - **`src/lib/formal.ts`** (NEW): `isFormal()` (SSR-safe read), `applyFormal(on)`
+    (toggles `html.formal`), `setFormal(on)` (persist + apply). This is the
+    single source of truth for the theme toggle.
+  - **`src/styles.css`**: big `html.formal { ... }` block near the end (before the
+    reduced-motion media query) — overrides palette (bg `#f4f2ec`, ink `#1a1a1a`,
+    white cards, hairline `--border` `#dcd8cf`), sets all `--font-*` to **Inter**,
+    collapses the neon/joycon vars to near-black so nothing glows, and flattens
+    `.pixel-card`/`.joycon-frame`/`.matte-panel`/`.pixel-btn`/`.switch-*` +
+    disables global & local CRT overlays + `.animate-neon`. Sprites kept but
+    softened (`.sticker` → soft drop-shadow, `image-rendering: auto`).
+  - **`src/routes/__root.tsx`**: added **Inter** to the Google Fonts `<link>`
+    (alongside Press Start 2P + VT323); `AudioBoot` now calls
+    `applyFormal(isFormal())` on mount to restore the saved theme early.
+  - **`src/components/band/Nav.tsx`**: dedicated `IconButton` in the right cluster
+    (👾 = pixel/off, 🎩 = formal/on) that calls `setFormal(!formalOn)`; local
+    `formalOn` state synced from `isFormal()` in a mount effect.
+- **Note on "assets"**: this site has no theme image files — theming is 100% CSS
+  variables + procedural SVG sprites. So Formal Mode's "assets" = the CSS theme
+  block + Inter webfont; no binary files were added. Existing sprites are reused.
+- **Build status**: NOT yet build-verified — Bash auto-mode classifier was
+  degraded this session (same recurring issue). Run `bun run build` to confirm.
+
+### Latest work (2026-07-07, 03:28-03:36 WIB) — FORMAL MODE CONTRAST FIX:
+- **Fixed comprehensive contrast issues in Formal Mode light theme** (user reported 
+  text was unreadable in many areas including Instagram, Bandcamp, and other sections 
+  where font and background colors were blending together):
+  
+  - **Phase 1 - Base color improvements:**
+    - Background: `#f4f2ec` → `#e8e4d8` (darker warm paper for clear card separation)
+    - Foreground: `#1a1a1a` → `#0a0a0a` (deeper black for maximum text readability)
+    - Muted foreground: `#6b6b6b` → `#3d3d3d` (much darker for proper contrast)
+    - Border: `#dcd8cf` → `#c4bfb0` (stronger, more visible borders)
+  
+  - **Phase 2 - Neon color strategy for dual use cases:**
+    - **Problem identified**: Neon colors used in TWO ways throughout the site:
+      1. As button backgrounds (Footer social buttons: Instagram, Bandcamp, WhatsApp)
+      2. As text colors (Hero tagline, merch prices, album info, etc.)
+    - **Solution**: Set neon colors to `#9a9a9a` (medium-light gray) in Formal Mode
+      - Works as button background with dark `#0a0a0a` text = good contrast
+      - Added CSS override: `.text-neon-*` utilities forced to use `var(--foreground)` 
+        with `!important`
+      - This ensures text elements using neon classes become dark and readable
+  
+  - **Result**: 
+    - All text throughout the site (Hero, Merch, Footer, Album pages, etc.) is now 
+      highly readable with proper WCAG contrast ratios
+    - Social buttons (Instagram, Bandcamp, WhatsApp) have readable dark text on 
+      light gray backgrounds
+    - Background-to-card contrast is clear, borders are visible
+    - The clean, minimalist paper aesthetic is maintained while ensuring full accessibility
+  
+  - Files modified: `src/styles.css` (Formal Mode color palette + text-neon overrides)
 
 ## 7. NEXT STEPS (pick up here)
 

@@ -476,6 +476,175 @@ html.crt-off body::after {
   animation: toast-in 240ms ease both;
 }
 
+/* ============================================================================
+   FORMAL MODE — clean minimalist light theme (modeled on thepanturas.com/store)
+   Toggled via `html.formal` (see src/lib/formal.ts). Overrides the pixel/neon/
+   Switch chrome with a paper background, black text, Inter sans, thin borders,
+   and no CRT/glow/block-shadows. Band sprites are kept, just softened.
+   ============================================================================ */
+html.formal {
+  /* ---- Minimalist paper palette with improved contrast ---- */
+  --radius: 6px; /* soft, understated corners */
+  --background: #e8e4d8; /* darker warm paper for better card contrast */
+  --foreground: #0a0a0a; /* deeper black for maximum readability */
+  --card: #ffffff;
+  --card-foreground: #0a0a0a;
+  --popover: #ffffff;
+  --popover-foreground: #0a0a0a;
+  --primary: #0a0a0a; /* deep black primary — buttons/links */
+  --primary-foreground: #ffffff;
+  --secondary: #d9d5c9;
+  --secondary-foreground: #0a0a0a;
+  --muted: #d9d5c9;
+  --muted-foreground: #3d3d3d; /* much darker for better contrast */
+  --accent: #0a0a0a;
+  --accent-foreground: #ffffff;
+  --destructive: #b23b2e;
+  --destructive-foreground: #ffffff;
+  --border: #c4bfb0; /* stronger border for visibility */
+  --input: #c4bfb0;
+  --ring: #0a0a0a;
+
+  /* Neon family becomes medium-light gray suitable as button backgrounds with dark text */
+  --neon-pink: #9a9a9a;
+  --neon-cyan: #9a9a9a;
+  --neon-yellow: #9a9a9a;
+  --neon-purple: #9a9a9a;
+  --neon-green: #9a9a9a;
+  --joycon-red: #9a9a9a;
+  --joycon-blue: #9a9a9a;
+
+  /* Matte "console" chrome → clean light surfaces */
+  --matte-900: #ffffff;
+  --matte-800: #ffffff;
+  --matte-700: #e8e4d8;
+  --matte-600: #c4bfb0;
+  --matte-fg: #0a0a0a;
+
+  --cream: #ffffff;
+  --ink: #0a0a0a;
+
+  /* All type becomes a clean grotesk sans; pixel fonts retired from reading */
+  --font-display: "Inter", system-ui, -apple-system, sans-serif;
+  --font-pixel: "Inter", system-ui, -apple-system, sans-serif;
+  --font-mono-retro: "Inter", ui-monospace, sans-serif;
+  --font-body: "Inter", system-ui, -apple-system, sans-serif;
+}
+
+html.formal body {
+  font-size: 1rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  image-rendering: auto;
+  /* Drop the pixel grid backdrop for flat paper */
+  background-image: none;
+}
+
+/* Kill the global CRT scanline + vignette overlay */
+html.formal body::after {
+  display: none !important;
+}
+
+/* Headings: keep them bold and calm — no forced caps, no neon text-shadow */
+html.formal h1,
+html.formal h2,
+html.formal h3,
+html.formal h4 {
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  text-transform: none;
+  text-shadow: none !important;
+}
+
+/* Sprites kept but softened: smooth scaling, drop the hard outline + glow */
+html.formal img.pixelated,
+html.formal .pixelated {
+  image-rendering: auto;
+}
+html.formal .sticker {
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.12));
+}
+
+/* ---- Neutralize the pixel/Switch utility classes into flat minimal cards ---- */
+html.formal .pixel-card,
+html.formal .joycon-frame {
+  border: 1px solid var(--border);
+  border-left-width: 1px;
+  border-right-width: 1px;
+  border-radius: var(--radius);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  image-rendering: auto;
+}
+
+html.formal .matte-panel {
+  background: var(--card);
+  color: var(--foreground);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 8px 24px -8px rgba(0, 0, 0, 0.18);
+}
+
+/* Buttons: quiet, bordered, no block shadow / selector arrow / glow */
+html.formal .pixel-btn {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+  background: var(--primary);
+  color: var(--primary-foreground);
+  border: 1px solid var(--primary);
+  border-radius: var(--radius);
+  box-shadow: none;
+}
+html.formal .pixel-btn::before {
+  content: none;
+}
+html.formal .pixel-btn:hover {
+  background: transparent;
+  color: var(--primary);
+  transform: none;
+  box-shadow: none;
+  text-shadow: none;
+}
+html.formal .pixel-btn:active {
+  transform: none;
+}
+
+/* Switch tiles / nav tiles → flat hover, no translate/glow */
+html.formal .switch-tile:hover,
+html.formal .switch-tile:focus-visible,
+html.formal .switch-nav-tile:hover,
+html.formal .switch-nav-tile:focus-visible {
+  transform: none;
+  outline-color: var(--border);
+  border-color: var(--foreground);
+  box-shadow: none;
+  background: var(--muted);
+}
+
+/* Local per-panel CRT/scanline overlays off in formal mode */
+html.formal .scanlines::after,
+html.formal .crt-overlay::before {
+  display: none !important;
+}
+
+/* Retire the neon pulse animation so nothing throbs */
+html.formal .animate-neon {
+  animation: none;
+}
+
+/* Override neon colors when used as text colors - make them dark for readability */
+html.formal .text-neon-pink,
+html.formal .text-neon-cyan,
+html.formal .text-neon-yellow,
+html.formal .text-neon-purple,
+html.formal .text-neon-green {
+  color: var(--foreground) !important;
+}
+
 /* ---------- Respect users who prefer reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
   *,

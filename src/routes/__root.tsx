@@ -13,6 +13,7 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { bgm } from "../lib/bgm";
 import { sfx } from "../lib/sfx";
+import { isFormal, applyFormal } from "../lib/formal";
 import { emitToast } from "../lib/toast";
 import { SystemToast } from "../components/band/SystemToast";
 
@@ -28,6 +29,8 @@ function AudioBoot() {
   useEffect(() => {
     bgm.init();
     sfx.init();
+    // Re-apply the saved Formal Mode theme as early as possible to avoid a flash.
+    applyFormal(isFormal());
 
     if (window.localStorage.getItem(BOOT_KEY) === "1") return;
     window.localStorage.setItem(BOOT_KEY, "1");
@@ -139,7 +142,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         },
         {
           rel: "stylesheet",
-          href: "https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap",
+          href: "https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=Inter:wght@400;500;600;700&display=swap",
         },
       ],
     }),
